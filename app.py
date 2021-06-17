@@ -14,6 +14,13 @@ model = pickle.load(open('nlp_WR20.pickle', 'rb'))
 def home():
     return render_template('index.html')
 
+@app.route("/search")
+def get_input():
+    query_input = request.args.get("loc")
+    prediction = wr_nlp_train_linear_svc.wr_model(query_input) 
+    output = np.array_str(prediction)
+    return output
+
 @app.route('/predict',methods=['POST'])
 def predict():
     '''
