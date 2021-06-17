@@ -5,6 +5,7 @@ import pickle
 import wr_nlp_train_linear_svc
 
 pd.set_option('display.max_colwidth', 300)
+pd.show_versions(as_json=False)
 
 app = Flask(__name__)
 model = pickle.load(open('nlp_WR20.pickle', 'rb'))

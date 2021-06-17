@@ -2,6 +2,7 @@ import pandas as pd
 import re
 import string
 import nltk
+import sklearn
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, TfidfTransformer
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
@@ -11,6 +12,14 @@ from sklearn import metrics
 #from sklearn.externals import joblib
 import time
 import pickle
+
+
+pd.show_versions(as_json=False)
+print('-------------------- check nltk sklearn version ----------------------------')
+nltk_version = nltk.__version__
+print(nltk_version)
+sklearn_version = sklearn.__version__
+print(sklearn_version)
 
 def wr_model(user_input):
     #df = pd.read_csv('wr_level_csv_ver3.csv') #Consumer_Complaints.csv")
