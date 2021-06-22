@@ -3,9 +3,10 @@ import numpy as np
 from flask import Flask, request, jsonify, render_template, redirect
 import pickle
 import wr_nlp_train_linear_svc
+import json
 
 pd.set_option('display.max_colwidth', 300)
-pd.show_versions(as_json=False)
+#pd.show_versions(as_json=False)
 
 app = Flask(__name__)
 model = pickle.load(open('nlp_WR20.pickle', 'rb'))
@@ -13,6 +14,15 @@ model = pickle.load(open('nlp_WR20.pickle', 'rb'))
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/status')
+def status():
+    wr = {"7009677":"Complete","7007651":"On Work Order","6979886":"Complete"}
+    query_input = request.args.get('workrequest')
+    for x, y in wr.items():
+        if x == query_input:
+            return y
+ 
 
 @app.route("/search")
 def get_input():

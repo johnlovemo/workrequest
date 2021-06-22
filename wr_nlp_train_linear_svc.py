@@ -14,12 +14,12 @@ import time
 import pickle
 
 
-pd.show_versions(as_json=False)
+""" pd.show_versions(as_json=False)
 print('-------------------- check nltk sklearn version ----------------------------')
 nltk_version = nltk.__version__
 print(nltk_version)
 sklearn_version = sklearn.__version__
-print(sklearn_version)
+print(sklearn_version) """
 
 def wr_model(user_input):
     #df = pd.read_csv('wr_level_csv_ver3.csv') #Consumer_Complaints.csv")
