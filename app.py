@@ -1,3 +1,4 @@
+from operator import index
 import pandas as pd
 import numpy as np
 from flask import Flask, request, jsonify, render_template, redirect
@@ -15,14 +16,28 @@ model = pickle.load(open('nlp_WR20.pickle', 'rb'))
 def home():
     return render_template('index.html')
 
-@app.route('/status')
+""" @app.route('/status')
 def status():
     wr = {"7009677":"Complete","7007651":"On Work Order","6979886":"Complete"}
     query_input = request.args.get('workrequest')
     for x, y in wr.items():
         if x == query_input:
-            return y
+            return y """
  
+@app.route('/status')
+def status():
+    df = pd.DataFrame(
+        {'work_request' : ["7009677","7007651","6979886","658997","7145890","7019410"],
+        'status' : ['Complete','On Work Order','Complete','New','Complete','Complete'],
+        'resource' : ['John','Lonan','Revathi','Christi','Angel','Albie'],
+        'scheduled_end_date' : ['02/21/2022','08/21/2021','02/21/2022','10/03/2021','02/11/2022','08/15/2021']
+        }
+    )
+    query_input1 = request.args.get('workrequest')
+    query_input2 = request.args.get('field')
+    wr = df.loc[df['work_request'] == query_input1][query_input2].values[0]
+    #df.index[df['work_request'] == query_input1]
+    return wr
 
 @app.route("/search")
 def get_input():
