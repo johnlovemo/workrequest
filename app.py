@@ -27,7 +27,7 @@ def status():
 @app.route('/status')
 def status():
     df = pd.DataFrame(
-        {'work_request' : ["7009677","7007651","6979886","658997","7145890","7019410"],
+        {'work_request' : ["7009","7007","6979","6589","7145","7019"],
         'status' : ['Complete','On Work Order','Complete','New','Complete','Complete'],
         'resource' : ['John','Lonan','Revathi','Christi','Angel','Albie'],
         'scheduled_end_date' : ['02/21/2022','08/21/2021','02/21/2022','10/03/2021','02/11/2022','08/15/2021']
