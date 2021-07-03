@@ -67,17 +67,25 @@ def predict():
     #return redirect(prediction)
     #render_template('type.html', prediction_text='Is your request is for {}'.format(prediction))
 
-@app.route('/building',methods=['POST'])
+@app.route('/building')
 def building():
-    '''
-    For rendering results on HTML GUI
-    '''
+    df = pd.DataFrame(
+        {'building' : ["07-515 LKSC","07-308 LANE","13-040 CAM","07-600 BMI 1","07-530 BECKMAN"],
+        'url' : ['https://maps.googleapis.com/maps/api/staticmap?center=Stanford+LKSC,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
+        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Alway+Building,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
+        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Center+for+Academic+Medicine,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
+        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Biomedical+Innovations+Building,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
+        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Beckman+Center,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg']
+        }
+    )
     print('---------------- request value -------------------')
-    print(type(request.form.get('building')))
-    building_name = request.form.get('building')
-
-    #return redirect(prediction)
-    render_template('building.html', prediction_text='Is your request is for {}'.format(building_name))
+    print(type(request.args.get('building')))
+    print(request.args.get('building'))
+    building_name = request.args.get('building')
+    print('building name is ' + building_name)
+    bd = df.loc[df['building'] == building_name]['url'].values[0]
+    print(bd)
+    return redirect(bd)
 
 if __name__ == "__main__":
     app.run(debug=True)
