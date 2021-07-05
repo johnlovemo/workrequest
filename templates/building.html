@@ -2,33 +2,18 @@
 <html >
 <!--From https://codepen.io/frytyler/pen/EGdtg-->
 <head>
-  <meta charset="UTF-8">
-  <title>ML API</title>
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  
+  <h1>Map</h1>
 </head>
 
 <body>
- <div class="login">
-	<h1>Work Request Form</h1>
-  <h2>What is the name of the building that's having the issue?</h2>
-
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="https://workrequest.herokuapp.com/building"method="post">
-    	<input type="text" name="building" placeholder="building" size="50" required="required" />
-        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
-    </form>
-
-   <br>
-   <br>
-   <h2>{{ prediction_text }}</h2>
-
- </div>
-
-
-</body>
+  <div class="login">
+   <h1>Map</h1>
+    <h2>IF this is correct, please type yes</h2>
+      <!-- Main Input For Receiving Query to our ML -->
+      <img src="/static/images/{{file}}" alt="Flowers in Chania">
+ 
+  </div>
+ 
+ 
+ </body>
 </html>
