@@ -73,11 +73,11 @@ def predict():
 def building():
     df = pd.DataFrame(
         {'building' : ["07-515 LKSC","07-308 LANE","13-040 CAM","07-600 BMI 1","07-530 BECKMAN"],
-        'url' : ['https://maps.googleapis.com/maps/api/staticmap?center=Stanford+LKSC,Stanford,CA&zoom=13&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
-        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Lane+Building,Stanford,CA&zoom=17&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
-        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Center+for+Academic+Medicine,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
-        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Biomedical+Innovations+Building,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
-        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Beckman+Building,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg']
+        'url' : ['lksc.png',
+        'lane.png',
+        'cam.png',
+        'bmi1.png',
+        'beckman.png']
         }
     )
     print('---------------- request value -------------------')
@@ -88,8 +88,8 @@ def building():
     bd = df.loc[df['building'] == building_name]['url'].values[0]
     print(bd)
     #return redirect(bd)
-    webbrowser.open_new_tab(bd)
-    return 1 #render_template('building.html', prediction_text='==> Suggested category is {}'.format(bd))
+    #webbrowser.open_new_tab(bd)
+    return render_template('building.html', file=bd)
 
 if __name__ == "__main__":
     app.run(debug=True)
