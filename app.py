@@ -1,10 +1,12 @@
 from operator import index
+from flask.templating import render_template_string
 import pandas as pd
 import numpy as np
 from flask import Flask, request, jsonify, render_template, redirect
 import pickle
 import wr_nlp_train_linear_svc
 import json
+import webbrowser
 
 pd.set_option('display.max_colwidth', 300)
 #pd.show_versions(as_json=False)
@@ -71,11 +73,11 @@ def predict():
 def building():
     df = pd.DataFrame(
         {'building' : ["07-515 LKSC","07-308 LANE","13-040 CAM","07-600 BMI 1","07-530 BECKMAN"],
-        'url' : ['https://maps.googleapis.com/maps/api/staticmap?center=Stanford+LKSC,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
-        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Alway+Building,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
+        'url' : ['https://maps.googleapis.com/maps/api/staticmap?center=Stanford+LKSC,Stanford,CA&zoom=13&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
+        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Lane+Building,Stanford,CA&zoom=17&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
         'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Center+for+Academic+Medicine,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
         'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Biomedical+Innovations+Building,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg',
-        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Beckman+Center,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg']
+        'https://maps.googleapis.com/maps/api/staticmap?center=Stanford+Beckman+Building,Stanford,CA&zoom=18&size=600x300&maptype=roadmap&key=AIzaSyDH57WsBe3KAphS6oVbRRlFScaqRoZfbqg']
         }
     )
     print('---------------- request value -------------------')
@@ -85,7 +87,9 @@ def building():
     print('building name is ' + building_name)
     bd = df.loc[df['building'] == building_name]['url'].values[0]
     print(bd)
-    return redirect(bd)
+    #return redirect(bd)
+    webbrowser.open_new_tab(bd)
+    return 1 #render_template('building.html', prediction_text='==> Suggested category is {}'.format(bd))
 
 if __name__ == "__main__":
     app.run(debug=True)
